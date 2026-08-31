@@ -1149,6 +1149,9 @@ body {
 }
 
 .table-card {
+  width: min(90vw, 1120px);
+  margin-right: auto;
+  margin-left: auto;
   overflow: hidden;
   border: 1px solid #eeeeee;
   border-radius: 18px;
