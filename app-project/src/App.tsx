@@ -87,7 +87,7 @@ function App() {
             onClick={() => navigate("/")}
             aria-label="Go to home page"
           >
-            <span className="logo-icon">✦</span>
+            <span className="logo-icon"></span>
             ម្អម
           </button>
 
@@ -170,7 +170,7 @@ function App() {
         <div className="container footer-content">
           <div>
             <h3>
-              ✦ ម្អម
+               ម្អម
             </h3>
             <p>Authentic Khmer food. Warm hospitality. Meaningful moments.</p>
           </div>
@@ -305,15 +305,12 @@ function HomePage({ navigate }: NavigationProps) {
             />
           </div>
           <div className="story-copy">
-            <p className="section-label">រឿងរ៉ាវរបស់យើង</p>
-            <h2>ម្ហូបអាហារដែលចាក់ឫសក្នុងទីកន្លែង និងអនុស្សាវរីយ៍។</h2>
+            <p className="section-label"></p>
+            <h2></h2>
             <p>
-              ម្អមទទួលបានការបំផុសគំនិតពីរុក្ខជាតិពិសេសមួយ ដែលដុះតាមធម្មជាតិ
-              នៅក្នុងវាលស្រែកម្ពុជា និងជួយបន្ថែមរសជាតិដល់ម្ហូបប្រពៃណីជាច្រើន។
-              ផ្ទះបាយរបស់យើងនាំយកអារម្មណ៍នៃទីកន្លែងដ៏ដូចគ្នានោះមកក្នុងរាល់មុខម្ហូប។
             </p>
             <button className="text-button" type="button" onClick={() => navigate("/about")}>
-              ស្វែងយល់ពីរឿងរ៉ាវរបស់យើង <span aria-hidden="true">→</span>
+              Discover Our Story <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
