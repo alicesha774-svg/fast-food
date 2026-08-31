@@ -97,12 +97,12 @@ export default function ProductPage() {
                 <thead>
                   <tr>
                     <th scope="col">Food</th>
-                    <th scope="col">Cuisine</th>
-                    <th scope="col">Category</th>
+                    <th className="optional-column" scope="col">Cuisine</th>
+                    <th className="optional-column" scope="col">Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Rating</th>
                     <th scope="col">Availability</th>
-                    <th scope="col">
+                    <th className="details-column" scope="col">
                       <span className="sr-only">Details</span>
                     </th>
                   </tr>
@@ -119,15 +119,22 @@ export default function ProductPage() {
                               🍽️
                             </span>
                           )}
-                          <span>{food.name}</span>
+                          <span>
+                            <Link
+                              className="table-food-link"
+                              to={`/foods/${encodeURIComponent(food.id)}`}
+                            >
+                              {food.name}
+                            </Link>
+                          </span>
                         </div>
                       </td>
-                      <td>{food.cuisine}</td>
-                      <td>{food.category}</td>
+                      <td className="optional-column">{food.cuisine}</td>
+                      <td className="optional-column">{food.category}</td>
                       <td>{formatPrice(food.price)}</td>
                       <td>{formatRating(food.average_rating)}</td>
                       <td>{food.available ? "Available" : "Sold out"}</td>
-                      <td>
+                      <td className="details-column">
                         <Link
                           className="table-link"
                           to={`/foods/${encodeURIComponent(food.id)}`}

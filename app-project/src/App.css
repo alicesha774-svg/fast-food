@@ -1025,6 +1025,66 @@ body {
   .story-copy {
     order: 1;
   }
+
+  .food-table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .food-table .optional-column,
+  .food-table .details-column {
+    display: none;
+  }
+
+  .food-table th,
+  .food-table td {
+    padding: 14px 8px;
+    white-space: normal;
+  }
+
+  .food-table th {
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+  }
+
+  .food-table th:nth-child(1),
+  .food-table td:nth-child(1) {
+    width: 44%;
+  }
+
+  .food-table th:nth-child(4),
+  .food-table td:nth-child(4),
+  .food-table th:nth-child(5),
+  .food-table td:nth-child(5) {
+    width: 17%;
+  }
+
+  .food-table th:nth-child(6),
+  .food-table td:nth-child(6) {
+    width: 22%;
+  }
+
+  .table-food-name {
+    min-width: 0;
+    gap: 7px;
+    font-size: 0.78rem;
+  }
+
+  .table-food-name img,
+  .table-food-placeholder {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .table-food-name span {
+    overflow-wrap: anywhere;
+  }
+
+  .table-food-link {
+    color: var(--dark);
+    text-decoration: none;
+  }
 }
 
 @media (max-width: 480px) {
