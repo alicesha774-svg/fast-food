@@ -12,6 +12,9 @@
 The app uses the API at `https://sombobaeb.cheat.casa` for the data table and
 dynamic food details. Run `npm run dev` to start the local development server.
 
+A snapshot backup of the supplied dataset is also kept at
+`public/food-items.json` (83 food items).
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
