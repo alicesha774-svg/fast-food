@@ -13,6 +13,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [foods, setFoods] = useState<ApiFood[]>([]);
+  const [menuLoaded, setMenuLoaded] = useState(false);
   const [menuError, setMenuError] = useState(false);
   const location = useLocation();
   const routerNavigate = useNavigate();
@@ -27,7 +28,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (pathname !== "/menu" || foods.length > 0 || menuError) {
+    if (pathname !== "/menu" || menuLoaded || menuError) {
       return;
     }
 
@@ -37,18 +38,20 @@ function App() {
       .then((data) => {
         if (isCurrent) {
           setFoods(data);
+          setMenuLoaded(true);
         }
       })
       .catch(() => {
         if (isCurrent) {
           setMenuError(true);
+          setMenuLoaded(true);
         }
       });
 
     return () => {
       isCurrent = false;
     };
-  }, [foods.length, menuError, pathname]);
+  }, [menuError, menuLoaded, pathname]);
 
   const filteredFoods =
     selectedCategory === "All"
@@ -58,7 +61,7 @@ function App() {
     "All",
     ...Array.from(new Set(foods.map((food) => food.category))),
   ];
-  const menuLoading = pathname === "/menu" && foods.length === 0 && !menuError;
+  const menuLoading = pathname === "/menu" && !menuLoaded && !menuError;
 
   return (
     <div className="app">
@@ -131,6 +134,7 @@ function App() {
             error={menuError}
             onRetry={() => {
               setFoods([]);
+              setMenuLoaded(false);
               setMenuError(false);
             }}
           />
