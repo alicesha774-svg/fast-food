@@ -1,81 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import ProductPage, { FoodDetailPage } from "./pages/ProductPage";
+import {
+  fetchFoodItems,
+  type FoodItem as ApiFood,
+} from "./assets/component/cart/lib/food-api";
 import "./App.css";
 
 type Page = "home" | "menu" | "about";
 
-type FoodItem = {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  category: string;
-  image: string;
-};
-
-const foods: FoodItem[] = [
-  {
-    id: 1,
-    name: "Classic Burger",
-    description: "Juicy beef patty, fresh lettuce, tomato, cheese and our special sauce.",
-    price: "$8.99",
-    category: "Burgers",
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 2,
-    name: "Double Cheese Burger",
-    description: "Two delicious beef patties loaded with melted cheese.",
-    price: "$11.99",
-    category: "Burgers",
-    image:
-      "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 3,
-    name: "Crispy Chicken",
-    description: "Golden crispy chicken with fresh vegetables and creamy sauce.",
-    price: "$9.49",
-    category: "Chicken",
-    image:
-      "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 4,
-    name: "French Fries",
-    description: "Crispy golden fries served hot and perfectly seasoned.",
-    price: "$4.99",
-    category: "Sides",
-    image:
-      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 5,
-    name: "Pepperoni Pizza",
-    description: "Freshly baked pizza topped with cheese and pepperoni.",
-    price: "$12.99",
-    category: "Pizza",
-    image:
-      "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 6,
-    name: "Cold Cola",
-    description: "Refreshing cold drink, perfect with your favorite meal.",
-    price: "$2.99",
-    category: "Drinks",
-    image:
-      "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&w=900&q=80",
-  },
-];
-
-const categories = ["All", "Burgers", "Chicken", "Pizza", "Sides", "Drinks"];
-
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [foods, setFoods] = useState<ApiFood[]>([]);
+  const [menuError, setMenuError] = useState(false);
   const location = useLocation();
   const routerNavigate = useNavigate();
   const { pathname } = location;
@@ -88,10 +26,39 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    if (pathname !== "/menu" || foods.length > 0 || menuError) {
+      return;
+    }
+
+    let isCurrent = true;
+
+    fetchFoodItems(0, 100)
+      .then((data) => {
+        if (isCurrent) {
+          setFoods(data);
+        }
+      })
+      .catch(() => {
+        if (isCurrent) {
+          setMenuError(true);
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [foods.length, menuError, pathname]);
+
   const filteredFoods =
     selectedCategory === "All"
       ? foods
       : foods.filter((food) => food.category === selectedCategory);
+  const categories = [
+    "All",
+    ...Array.from(new Set(foods.map((food) => food.category))),
+  ];
+  const menuLoading = pathname === "/menu" && foods.length === 0 && !menuError;
 
   return (
     <div className="app">
@@ -159,6 +126,13 @@ function App() {
             setSelectedCategory={setSelectedCategory}
             filteredFoods={filteredFoods}
             navigate={navigate}
+            categories={categories}
+            loading={menuLoading}
+            error={menuError}
+            onRetry={() => {
+              setFoods([]);
+              setMenuError(false);
+            }}
           />
         )}
 
@@ -291,8 +265,12 @@ function HomePage({ navigate }: NavigationProps) {
 type MenuProps = {
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
-  filteredFoods: FoodItem[];
+  filteredFoods: ApiFood[];
   navigate: (path: string) => void;
+  categories: string[];
+  loading: boolean;
+  error: boolean;
+  onRetry: () => void;
 };
 
 function MenuPage({
@@ -300,6 +278,10 @@ function MenuPage({
   setSelectedCategory,
   filteredFoods,
   navigate,
+  categories,
+  loading,
+  error,
+  onRetry,
 }: MenuProps) {
   return (
     <section className="menu-page">
@@ -312,7 +294,24 @@ function MenuPage({
           </span>
         </div>
 
-        <div className="category-buttons">
+        {loading && (
+          <div className="api-message" role="status" aria-live="polite">
+            Loading the food menu…
+          </div>
+        )}
+
+        {error && (
+          <div className="api-message error-message" role="alert">
+            <strong>We couldn&apos;t load the menu.</strong>
+            <p>Check your connection and try again.</p>
+            <button className="primary-button" type="button" onClick={onRetry}>
+              Try again
+            </button>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="category-buttons">
           {categories.map((category) => (
             <button
               key={category}
@@ -324,20 +323,32 @@ function MenuPage({
               {category}
             </button>
           ))}
-        </div>
+          </div>
+        )}
 
-        <div className="food-grid">
+        {!loading && !error && filteredFoods.length === 0 && (
+          <div className="api-message">No food items match this category.</div>
+        )}
+
+        {!loading && !error && filteredFoods.length > 0 && (
+          <div className="food-grid">
           {filteredFoods.map((food) => (
             <article className="food-card" key={food.id}>
               <div className="food-image-wrapper">
-                <img src={food.image} alt={food.name} />
+                {food.image_url ? (
+                  <img src={food.image_url} alt={food.name} loading="lazy" />
+                ) : (
+                  <div className="food-image-placeholder" aria-hidden="true">
+                    🍽️
+                  </div>
+                )}
                 <span className="food-category">{food.category}</span>
               </div>
 
               <div className="food-content">
                 <div className="food-title">
                   <h3>{food.name}</h3>
-                  <strong>{food.price}</strong>
+                  <strong>${food.price.toFixed(2)}</strong>
                 </div>
 
                 <p>{food.description}</p>
@@ -345,14 +356,15 @@ function MenuPage({
                 <button
                   className="order-button"
                   type="button"
-                  onClick={() => navigate("/foods")}
+                  onClick={() => navigate(`/foods/${encodeURIComponent(food.id)}`)}
                 >
-                  View Food Data
+                  View Details
                 </button>
               </div>
             </article>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
