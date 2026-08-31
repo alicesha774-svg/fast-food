@@ -9,6 +9,16 @@ import "./App.css";
 
 type Page = "home" | "menu" | "about";
 
+function getFoodId(pathname: string) {
+  const rawId = pathname.slice("/foods/".length);
+
+  try {
+    return decodeURIComponent(rawId);
+  } catch {
+    return rawId;
+  }
+}
+
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -119,7 +129,11 @@ function App() {
       <main>
         {pathname === "/foods" && <ProductPage />}
 
-        {pathname.startsWith("/foods/") && <FoodDetailPage />}
+        {pathname.startsWith("/foods/") && (
+          <FoodDetailPage
+            id={getFoodId(pathname)}
+          />
+        )}
 
         {pathname === "/" && <HomePage navigate={navigate} />}
 

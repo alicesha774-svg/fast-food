@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link } from "react-router";
 import {
   API_BASE,
   fetchFoodItems,
@@ -154,8 +154,7 @@ export default function ProductPage() {
   );
 }
 
-export function FoodDetailPage() {
-  const { id } = useParams<{ id: string }>();
+export function FoodDetailPage({ id }: { id?: string }) {
   const [food, setFood] = useState<FoodItem | null>(null);
   const [requestState, setRequestState] = useState<RequestState>("loading");
 
