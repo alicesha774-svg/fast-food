@@ -1164,8 +1164,10 @@ body {
 }
 
 .food-table {
-  width: 100%;
+  width: 90%;
   min-width: 720px;
+  margin-right: auto;
+  margin-left: auto;
   border-collapse: collapse;
   text-align: left;
 }
