@@ -72,8 +72,8 @@ function App() {
             onClick={() => navigate("/")}
             aria-label="Go to home page"
           >
-            <span className="logo-icon">🍔</span>
-            Fast<span>Food</span>
+            <span className="logo-icon">✦</span>
+            MAOM <span>Khmer Cuisine</span>
           </button>
 
           <button
@@ -147,12 +147,12 @@ function App() {
         <div className="container footer-content">
           <div>
             <h3>
-              🍔 Fast<span>Food</span>
+              ✦ MAOM <span>Khmer Cuisine</span>
             </h3>
-            <p>Fresh food. Fast service. Happy moments.</p>
+            <p>Authentic Khmer food. Warm hospitality. Meaningful moments.</p>
           </div>
 
-          <p>© {new Date().getFullYear()} FastFood. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} MAOM Khmer Cuisine. All rights reserved.</p>
         </div>
       </footer>
     </div>
