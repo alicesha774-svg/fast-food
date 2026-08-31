@@ -68,7 +68,8 @@ button {
   gap: 12px;
 }
 
-.nav-links button {
+.nav-links button,
+.nav-links a {
   border: none;
   background: transparent;
   color: #444;
@@ -77,10 +78,13 @@ button {
   font-weight: 600;
   border-radius: 8px;
   transition: 0.25s ease;
+  text-decoration: none;
 }
 
 .nav-links button:hover,
-.nav-links button.active {
+.nav-links button.active,
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary);
   background: var(--light);
 }
@@ -609,7 +613,8 @@ button {
     display: flex;
   }
 
-  .nav-links button {
+  .nav-links button,
+  .nav-links a {
     text-align: left;
   }
 
@@ -652,7 +657,7 @@ button {
 }
 
 /* =========================
-   MAOM-INSPIRED HOME THEME
+   MAOM HOME THEME
 ========================= */
 
 :root {
@@ -690,12 +695,15 @@ body {
   color: var(--primary);
 }
 
-.nav-links button {
+.nav-links button,
+.nav-links a {
   color: #f7f0dc;
 }
 
 .nav-links button:hover,
-.nav-links button.active {
+.nav-links button.active,
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--primary);
   background: rgba(201, 162, 77, 0.14);
 }
@@ -1238,6 +1246,22 @@ body {
   color: var(--dark);
   font-weight: 700;
   white-space: normal;
+}
+
+.table-food-link,
+.table-food-link:visited {
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+.table-food-link:hover,
+.table-food-link:focus-visible {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .table-food-name img {

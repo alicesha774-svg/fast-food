@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import ProductPage, { FoodDetailPage } from "./pages/ProductPage";
 import {
   fetchFoodItems,
@@ -33,6 +33,11 @@ function App() {
 
   const navigate = (path: string) => {
     routerNavigate(path);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleNavLinkClick = () => {
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -83,7 +88,7 @@ function App() {
             aria-label="Go to home page"
           >
             <span className="logo-icon">✦</span>
-            MAOM <span>Khmer Cuisine</span>
+            ម្អម
           </button>
 
           <button
@@ -95,33 +100,37 @@ function App() {
           </button>
 
           <nav className={mobileMenuOpen ? "nav-links open" : "nav-links"}>
-            <button
+            <Link
               className={page === "home" ? "active" : ""}
-              onClick={() => navigate("/")}
+              to="/"
+              onClick={handleNavLinkClick}
             >
               Home
-            </button>
+            </Link>
 
-            <button
+            <Link
               className={page === "menu" ? "active" : ""}
-              onClick={() => navigate("/menu")}
+              to="/menu"
+              onClick={handleNavLinkClick}
             >
               Food Menu
-            </button>
+            </Link>
 
-            <button
+            <Link
               className={page === "about" ? "active" : ""}
-              onClick={() => navigate("/about")}
+              to="/about"
+              onClick={handleNavLinkClick}
             >
               About Us
-            </button>
+            </Link>
 
-            <button
+            <Link
               className={pathname.startsWith("/foods") ? "active" : ""}
-              onClick={() => navigate("/foods")}
+              to="/foods"
+              onClick={handleNavLinkClick}
             >
               Food Data
-            </button>
+            </Link>
           </nav>
         </div>
       </header>
@@ -161,12 +170,12 @@ function App() {
         <div className="container footer-content">
           <div>
             <h3>
-              ✦ MAOM <span>Khmer Cuisine</span>
+              ✦ ម្អម
             </h3>
             <p>Authentic Khmer food. Warm hospitality. Meaningful moments.</p>
           </div>
 
-          <p>© {new Date().getFullYear()} MAOM Khmer Cuisine. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} ម្អម. All rights reserved.</p>
         </div>
       </footer>
     </div>
@@ -291,20 +300,20 @@ function HomePage({ navigate }: NavigationProps) {
           <div className="story-image">
             <img
               src="https://maomkhmercuisine.com/wp-content/uploads/2026/01/DSCF2551.png"
-              alt="Traditional Khmer food served at a table"
+              alt="ម្ហូបខ្មែរប្រពៃណីដែលរៀបចំជូននៅលើតុ"
               loading="lazy"
             />
           </div>
           <div className="story-copy">
-            <p className="section-label">OUR STORY</p>
-            <h2>Food rooted in place and memory.</h2>
+            <p className="section-label">រឿងរ៉ាវរបស់យើង</p>
+            <h2>ម្ហូបអាហារដែលចាក់ឫសក្នុងទីកន្លែង និងអនុស្សាវរីយ៍។</h2>
             <p>
-              MAOM is inspired by a special plant that grows naturally in
-              Cambodian rice fields and flavors many traditional dishes. Our
-              kitchen brings that same sense of place to every meal.
+              ម្អមទទួលបានការបំផុសគំនិតពីរុក្ខជាតិពិសេសមួយ ដែលដុះតាមធម្មជាតិ
+              នៅក្នុងវាលស្រែកម្ពុជា និងជួយបន្ថែមរសជាតិដល់ម្ហូបប្រពៃណីជាច្រើន។
+              ផ្ទះបាយរបស់យើងនាំយកអារម្មណ៍នៃទីកន្លែងដ៏ដូចគ្នានោះមកក្នុងរាល់មុខម្ហូប។
             </p>
             <button className="text-button" type="button" onClick={() => navigate("/about")}>
-              Discover our story <span aria-hidden="true">→</span>
+              ស្វែងយល់ពីរឿងរ៉ាវរបស់យើង <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
