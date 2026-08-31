@@ -166,21 +166,21 @@ type NavigationProps = {
 function HomePage({ navigate }: NavigationProps) {
   return (
     <>
-      <section className="hero">
+      <section className="hero heritage-hero">
         <div className="hero-overlay" />
 
         <div className="container hero-content">
           <div className="hero-text">
-            <p className="hero-label">🔥 THE BEST FAST FOOD IN TOWN</p>
+            <p className="hero-label">ម្អម · MAOM KHMER CUISINE</p>
 
             <h1>
-              Delicious Food,
-              <span> Delivered Fast.</span>
+              A taste of
+              <span> Khmer heritage.</span>
             </h1>
 
             <p className="hero-description">
-              Enjoy fresh, tasty and satisfying meals made with quality
-              ingredients. Your favorite food is only one click away.
+              Authentic Cambodian dishes prepared with fresh local ingredients,
+              traditional recipes and the warmth of a Khmer wooden home.
             </p>
 
             <div className="hero-buttons">
@@ -188,14 +188,14 @@ function HomePage({ navigate }: NavigationProps) {
                 className="primary-button"
                 onClick={() => navigate("/menu")}
               >
-                Explore Menu →
+                Explore our menu →
               </button>
 
               <button
                 className="secondary-button"
-                onClick={() => navigate("/about")}
+                onClick={() => document.getElementById("book")?.scrollIntoView({ behavior: "smooth" })}
               >
-                About Us
+                Book a table
               </button>
             </div>
           </div>
@@ -205,35 +205,35 @@ function HomePage({ navigate }: NavigationProps) {
       <section className="features-section">
         <div className="container">
           <div className="section-heading">
-            <p>WHY CHOOSE US</p>
-            <h2>Fast Food Made Better</h2>
+            <p>WELCOME TO MAOM</p>
+            <h2>Authentic flavors, thoughtfully served</h2>
           </div>
 
           <div className="features-grid">
             <article className="feature-card">
-              <div className="feature-icon">🍅</div>
-              <h3>Fresh Ingredients</h3>
+              <div className="feature-icon">⌂</div>
+              <h3>A Khmer wooden home</h3>
               <p>
-                We use carefully selected ingredients to make every meal fresh
-                and delicious.
+                Settle into a traditional house filled with history, greenery
+                and a warm welcome.
               </p>
             </article>
 
             <article className="feature-card">
-              <div className="feature-icon"></div>
-              <h3>Fast Service</h3>
+              <div className="feature-icon">✦</div>
+              <h3>Recipes with a story</h3>
               <p>
-                Your food is prepared quickly so you can enjoy your favorite
-                meal without waiting.
+                Time-honored Khmer techniques and fresh local ingredients make
+                every plate memorable.
               </p>
             </article>
 
             <article className="feature-card">
-              <div className="feature-icon"></div>
-              <h3>Made With Love</h3>
+              <div className="feature-icon">❋</div>
+              <h3>Made for gathering</h3>
               <p>
-                Every meal is prepared with care, passion and a love for great
-                food.
+                Share lunch, dinner or a special moment with friends and
+                family around the table.
               </p>
             </article>
           </div>
@@ -244,22 +244,74 @@ function HomePage({ navigate }: NavigationProps) {
         <div className="container">
           <div className="popular-banner">
             <div>
-              <p>OUR MOST POPULAR MEAL</p>
-              <h2>The Ultimate Burger Experience 🍔</h2>
+              <p>DISCOVER OUR MENUS</p>
+              <h2>From our Khmer kitchen to your table</h2>
               <span>
-                Fresh ingredients, juicy meat and melted cheese in every bite.
+                Explore authentic Khmer dishes, western favorites, take-away
+                meals and refreshing drinks.
               </span>
 
-              <button
-                className="primary-button"
-                onClick={() => navigate("/menu")}
-              >
-                View Food Menu
-              </button>
+              <div className="home-menu-links">
+                <button type="button" onClick={() => navigate("/menu")}>
+                  Khmer food
+                </button>
+                <button type="button" onClick={() => navigate("/menu")}>
+                  Western food
+                </button>
+                <button type="button" onClick={() => navigate("/menu")}>
+                  Take away
+                </button>
+                <button type="button" onClick={() => navigate("/menu")}>
+                  Drinks
+                </button>
+              </div>
             </div>
 
-            <div className="popular-emoji">🍔</div>
+            <div className="popular-emoji">ម្អម</div>
           </div>
+        </div>
+      </section>
+
+      <section className="story-section">
+        <div className="container story-grid">
+          <div className="story-image">
+            <img
+              src="https://maomkhmercuisine.com/wp-content/uploads/2026/01/DSCF2551.png"
+              alt="Traditional Khmer food served at a table"
+              loading="lazy"
+            />
+          </div>
+          <div className="story-copy">
+            <p className="section-label">OUR STORY</p>
+            <h2>Food rooted in place and memory.</h2>
+            <p>
+              MAOM is inspired by a special plant that grows naturally in
+              Cambodian rice fields and flavors many traditional dishes. Our
+              kitchen brings that same sense of place to every meal.
+            </p>
+            <button className="text-button" type="button" onClick={() => navigate("/about")}>
+              Discover our story <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="booking-section" id="book">
+        <div className="container booking-card">
+          <p className="section-label">COME DINE WITH US</p>
+          <h2>Make your next meal memorable.</h2>
+          <p>
+            Join us for a relaxed lunch or dinner in the heart of Siem Reap.
+            We look forward to welcoming you.
+          </p>
+          <div className="booking-details">
+            <span>Komai Road · Siem Reap</span>
+            <span>Open daily · 11:00 AM – 10:30 PM</span>
+            <a href="tel:+85593315841">+855 93 315 841</a>
+          </div>
+          <a className="primary-button inline-button" href="mailto:info@maomkhmercuisine.com">
+            Book a table
+          </a>
         </div>
       </section>
     </>

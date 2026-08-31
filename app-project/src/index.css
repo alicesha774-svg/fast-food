@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Khmer:wght@400;500;600;700&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -7,7 +8,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", "Noto Serif Khmer", Arial, sans-serif;
   background: #ffffff;
 }
 

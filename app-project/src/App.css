@@ -651,6 +651,382 @@ button {
   }
 }
 
+/* =========================
+   MAOM-INSPIRED HOME THEME
+========================= */
+
+:root {
+  --primary: #c9a24d;
+  --primary-dark: #a67c2b;
+  --dark: #143523;
+  --gray: #5f695f;
+  --light: #f3efe3;
+  --white: #fffdf7;
+  --forest: #063306;
+  --cream: #fbf8ef;
+}
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+}
+
+.app {
+  background: var(--cream);
+}
+
+.navbar {
+  background: rgba(6, 51, 6, 0.97);
+  border-bottom: 1px solid rgba(201, 162, 77, 0.35);
+}
+
+.logo {
+  color: var(--white);
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.02em;
+}
+
+.logo span:not(.logo-icon) {
+  color: var(--primary);
+}
+
+.nav-links button {
+  color: #f7f0dc;
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+  color: var(--primary);
+  background: rgba(201, 162, 77, 0.14);
+}
+
+.mobile-menu-button {
+  color: var(--white);
+}
+
+.heritage-hero {
+  min-height: min(760px, calc(100vh - 76px));
+  background-image: url("https://maomkhmercuisine.com/wp-content/uploads/2026/01/DSCF5666-2-1.jpg");
+  background-position: center 58%;
+}
+
+.heritage-hero .hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(6, 51, 6, 0.94) 0%,
+    rgba(6, 51, 6, 0.76) 45%,
+    rgba(6, 51, 6, 0.18) 100%
+  );
+}
+
+.heritage-hero .hero-text {
+  max-width: 700px;
+}
+
+.heritage-hero .hero-label {
+  color: #e3c878;
+  letter-spacing: 0.22em;
+}
+
+.heritage-hero h1,
+.section-heading h2,
+.popular-banner h2,
+.story-copy h2,
+.booking-card h2,
+.about-content h1,
+.page-header h1,
+.food-detail-content h1,
+.not-found-content h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.heritage-hero h1 {
+  max-width: 720px;
+  font-size: clamp(3.6rem, 8vw, 7.5rem);
+  line-height: 0.94;
+}
+
+.heritage-hero h1 span {
+  color: #e3c878;
+}
+
+.heritage-hero .hero-description {
+  max-width: 580px;
+  color: #f6f0df;
+  font-size: 1.12rem;
+}
+
+.primary-button {
+  background: var(--primary);
+  color: var(--forest);
+}
+
+.primary-button:hover {
+  background: #e3c878;
+}
+
+.secondary-button {
+  border-color: rgba(227, 200, 120, 0.85);
+  color: #f7f0dc;
+}
+
+.secondary-button:hover {
+  background: #f7f0dc;
+  color: var(--forest);
+}
+
+.features-section,
+.story-section {
+  background: var(--cream);
+}
+
+.section-heading {
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-heading > p,
+.section-label,
+.page-header > p {
+  color: var(--primary-dark);
+  letter-spacing: 0.18em;
+}
+
+.section-heading h2 {
+  color: var(--forest);
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+  line-height: 1.05;
+}
+
+.feature-card {
+  border: 0;
+  border-top: 2px solid var(--primary);
+  border-radius: 0;
+  background: transparent;
+  padding: 30px 8px 18px;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: none;
+}
+
+.feature-icon {
+  background: transparent;
+  color: var(--primary-dark);
+  font-family: Georgia, serif;
+  font-size: 2.2rem;
+}
+
+.feature-card h3 {
+  color: var(--forest);
+  font-family: Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.feature-card p {
+  color: var(--gray);
+}
+
+.popular-section {
+  background: var(--cream);
+  padding: 30px 0 100px;
+}
+
+.popular-banner {
+  min-height: 390px;
+  padding: clamp(34px, 6vw, 72px);
+  border: 1px solid rgba(227, 200, 120, 0.45);
+  border-radius: 0;
+  background: var(--forest);
+}
+
+.popular-banner p {
+  color: #e3c878;
+  letter-spacing: 0.18em;
+}
+
+.popular-banner h2 {
+  max-width: 700px;
+  color: #fff9ea;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  line-height: 1;
+}
+
+.popular-banner span {
+  max-width: 600px;
+  color: #d7dfd3;
+  line-height: 1.7;
+}
+
+.popular-emoji {
+  color: #e3c878;
+  font-family: Georgia, serif;
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 500;
+  letter-spacing: -0.08em;
+}
+
+.home-menu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.home-menu-links button {
+  border: 1px solid rgba(227, 200, 120, 0.65);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff9ea;
+  cursor: pointer;
+  padding: 10px 16px;
+  transition: 0.25s ease;
+}
+
+.home-menu-links button:hover,
+.home-menu-links button:focus-visible {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--forest);
+}
+
+.story-section {
+  padding: 30px 0 110px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+  align-items: center;
+  gap: clamp(34px, 8vw, 90px);
+}
+
+.story-image img {
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+}
+
+.story-copy h2 {
+  margin: 14px 0 20px;
+  color: var(--forest);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+}
+
+.story-copy > p:not(.section-label) {
+  max-width: 520px;
+  color: var(--gray);
+  line-height: 1.85;
+}
+
+.text-button {
+  border: 0;
+  border-bottom: 1px solid var(--primary-dark);
+  background: transparent;
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-weight: 700;
+  margin-top: 12px;
+  padding: 8px 0;
+}
+
+.text-button span {
+  padding-left: 10px;
+}
+
+.booking-section {
+  padding: 0 0 110px;
+  background: var(--cream);
+}
+
+.booking-card {
+  padding: clamp(36px, 7vw, 78px);
+  background: #e8e2d0;
+  text-align: center;
+}
+
+.booking-card h2 {
+  margin: 12px auto;
+  max-width: 720px;
+  color: var(--forest);
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  line-height: 1;
+}
+
+.booking-card > p:not(.section-label) {
+  max-width: 580px;
+  margin: 0 auto 22px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+.booking-details {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 26px 0 30px;
+  color: var(--forest);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.booking-details a {
+  color: var(--primary-dark);
+}
+
+.footer {
+  background: var(--forest);
+  border-top: 1px solid rgba(227, 200, 120, 0.35);
+}
+
+.footer h3 {
+  color: #fff9ea;
+  font-family: Georgia, serif;
+  font-weight: 500;
+}
+
+.footer h3 span {
+  color: var(--primary);
+}
+
+.footer p {
+  color: #cad6c7;
+}
+
+@media (max-width: 700px) {
+  .nav-links {
+    background: var(--forest);
+    border-bottom-color: rgba(201, 162, 77, 0.35);
+  }
+
+  .heritage-hero {
+    min-height: 650px;
+  }
+
+  .heritage-hero h1 {
+    font-size: clamp(3.2rem, 16vw, 5rem);
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-image {
+    order: 2;
+  }
+
+  .story-copy {
+    order: 1;
+  }
+}
+
 @media (max-width: 480px) {
   .container {
     width: min(92%, 1120px);
