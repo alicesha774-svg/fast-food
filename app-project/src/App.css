@@ -1427,3 +1427,86 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep the API table readable on narrow screens without horizontal scrolling. */
+@media (max-width: 700px) {
+  .table-scroll {
+    overflow: visible;
+  }
+
+  .food-table {
+    display: block;
+    width: 90%;
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  .food-table thead {
+    display: none;
+  }
+
+  .food-table tbody {
+    display: grid;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .food-table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 18px;
+    padding: 14px;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+
+  .food-table td {
+    display: flex;
+    width: auto !important;
+    min-width: 0;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 7px 0;
+    border: 0;
+    font-size: 0.82rem;
+  }
+
+  .food-table td:nth-child(1) {
+    grid-column: 1 / -1;
+  }
+
+  .food-table td:nth-child(4),
+  .food-table td:nth-child(5),
+  .food-table td:nth-child(6) {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .food-table td:nth-child(4)::before,
+  .food-table td:nth-child(5)::before,
+  .food-table td:nth-child(6)::before {
+    color: var(--gray);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .food-table td:nth-child(4)::before {
+    content: "Price";
+  }
+
+  .food-table td:nth-child(5)::before {
+    content: "Rating";
+  }
+
+  .food-table td:nth-child(6)::before {
+    content: "Availability";
+  }
+
+  .food-table .optional-column,
+  .food-table .details-column {
+    display: none;
+  }
+}
