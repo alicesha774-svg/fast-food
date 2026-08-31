@@ -1,5 +1,17 @@
 # React + TypeScript + Vite
 
+## FastFood routes
+
+- `/` — home page
+- `/menu` — the curated menu
+- `/foods` — food data table loaded from the Food Recommendation API
+- `/foods/:id` — details for one API food item
+- `/about` — about page
+- Any other path — custom 404 page
+
+The app uses the API at `https://sombobaeb.cheat.casa` for the data table and
+dynamic food details. Run `npm run dev` to start the local development server.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

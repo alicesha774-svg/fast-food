@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import ProductPage, { FoodDetailPage } from "./pages/ProductPage";
 import "./App.css";
 
 type Page = "home" | "menu" | "about";
@@ -72,47 +74,18 @@ const foods: FoodItem[] = [
 const categories = ["All", "Burgers", "Chicken", "Pizza", "Sides", "Drinks"];
 
 function App() {
-  const [page, setPage] = useState<Page>("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const location = useLocation();
+  const routerNavigate = useNavigate();
+  const { pathname } = location;
+  const page: Page =
+    pathname === "/menu" ? "menu" : pathname === "/about" ? "about" : "home";
 
-  const navigate = (newPage: Page) => {
-    setPage(newPage);
+  const navigate = (path: string) => {
+    routerNavigate(path);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-
-    if (hash === "menu" || hash === "about" || hash === "home") {
-      setPage(hash);
-    }
-
-    const handleHashChange = () => {
-      const currentHash = window.location.hash.replace("#", "");
-
-      if (
-        currentHash === "menu" ||
-        currentHash === "about" ||
-        currentHash === "home"
-      ) {
-        setPage(currentHash);
-      } else {
-        setPage("home");
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
-
-  const changePage = (newPage: Page) => {
-    window.location.hash = newPage;
-    navigate(newPage);
   };
 
   const filteredFoods =
@@ -126,7 +99,7 @@ function App() {
         <div className="container nav-container">
           <button
             className="logo"
-            onClick={() => changePage("home")}
+            onClick={() => navigate("/")}
             aria-label="Go to home page"
           >
             <span className="logo-icon">🍔</span>
@@ -144,36 +117,48 @@ function App() {
           <nav className={mobileMenuOpen ? "nav-links open" : "nav-links"}>
             <button
               className={page === "home" ? "active" : ""}
-              onClick={() => changePage("home")}
+              onClick={() => navigate("/")}
             >
               Home
             </button>
 
             <button
               className={page === "menu" ? "active" : ""}
-              onClick={() => changePage("menu")}
+              onClick={() => navigate("/menu")}
             >
               Food Menu
             </button>
 
             <button
               className={page === "about" ? "active" : ""}
-              onClick={() => changePage("about")}
+              onClick={() => navigate("/about")}
             >
               About Us
+            </button>
+
+            <button
+              className={pathname.startsWith("/foods") ? "active" : ""}
+              onClick={() => navigate("/foods")}
+            >
+              Food Data
             </button>
           </nav>
         </div>
       </header>
 
       <main>
-        {page === "home" && <HomePage navigate={changePage} />}
+        {pathname === "/foods" && <ProductPage />}
+
+        {pathname.startsWith("/foods/") && <FoodDetailPage />}
+
+        {pathname === "/" && <HomePage navigate={navigate} />}
 
         {page === "menu" && (
           <MenuPage
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
             filteredFoods={filteredFoods}
+            navigate={navigate}
           />
         )}
 
@@ -197,7 +182,7 @@ function App() {
 }
 
 type NavigationProps = {
-  navigate: (page: Page) => void;
+  navigate: (path: string) => void;
 };
 
 function HomePage({ navigate }: NavigationProps) {
@@ -223,14 +208,14 @@ function HomePage({ navigate }: NavigationProps) {
             <div className="hero-buttons">
               <button
                 className="primary-button"
-                onClick={() => navigate("menu")}
+                onClick={() => navigate("/menu")}
               >
                 Explore Menu →
               </button>
 
               <button
                 className="secondary-button"
-                onClick={() => navigate("about")}
+                onClick={() => navigate("/about")}
               >
                 About Us
               </button>
@@ -289,7 +274,7 @@ function HomePage({ navigate }: NavigationProps) {
 
               <button
                 className="primary-button"
-                onClick={() => navigate("menu")}
+                onClick={() => navigate("/menu")}
               >
                 View Food Menu
               </button>
@@ -307,12 +292,14 @@ type MenuProps = {
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
   filteredFoods: FoodItem[];
+  navigate: (path: string) => void;
 };
 
 function MenuPage({
   selectedCategory,
   setSelectedCategory,
   filteredFoods,
+  navigate,
 }: MenuProps) {
   return (
     <section className="menu-page">
@@ -355,7 +342,13 @@ function MenuPage({
 
                 <p>{food.description}</p>
 
-                <button className="order-button">Order Now</button>
+                <button
+                  className="order-button"
+                  type="button"
+                  onClick={() => navigate("/foods")}
+                >
+                  View Food Data
+                </button>
               </div>
             </article>
           ))}
